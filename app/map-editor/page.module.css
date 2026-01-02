@@ -1,0 +1,391 @@
+/* Map Editor CSS - Ported to Next.js CSS Modules */
+
+.editorContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+}
+
+/* Header */
+.editorHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: #16213e;
+    border-bottom: 2px solid #0f3460;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e94560;
+}
+
+.menu {
+    display: flex;
+    gap: 8px;
+}
+
+.menuBtn {
+    padding: 8px 16px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px;
+}
+
+.menuBtn:hover {
+    background-color: #e94560;
+}
+
+.backLink {
+    padding: 8px 16px;
+    background: #e94560;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.backLink:hover {
+    background: #ff6b8a;
+}
+
+/* Main Editor */
+.editorMain {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Panels */
+.panel {
+    background-color: #16213e;
+    display: flex;
+    flex-direction: column;
+}
+
+.panelLeft {
+    width: 540px;
+    border-right: 2px solid #0f3460;
+}
+
+.panelCenter {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.panelRight {
+    width: 200px;
+    border-left: 2px solid #0f3460;
+    overflow-y: auto;
+}
+
+.panelHeader {
+    padding: 12px;
+    border-bottom: 1px solid #0f3460;
+}
+
+.panelHeader h3 {
+    font-size: 14px;
+    color: #e94560;
+    margin: 0;
+}
+
+/* Tileset Tabs */
+.tilesetTabs {
+    display: flex;
+    border-bottom: 1px solid #0f3460;
+}
+
+.tilesetTab {
+    flex: 1;
+    padding: 10px 8px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.tilesetTab:hover {
+    background-color: #1a4a7a;
+}
+
+.tilesetTabActive {
+    background-color: #e94560;
+    color: white;
+}
+
+/* Tileset Palette */
+.paletteContainer {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #0d1b2a;
+}
+
+.paletteCanvas {
+    display: block;
+    image-rendering: pixelated;
+    cursor: pointer;
+}
+
+.tilePreview {
+    padding: 12px;
+    border-top: 1px solid #0f3460;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.previewCanvas {
+    border: 2px solid #0f3460;
+    image-rendering: pixelated;
+    background-color: #0d1b2a;
+}
+
+/* Canvas Area */
+.canvasWrapper {
+    flex: 1;
+    overflow: auto;
+    background-color: #0d1b2a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.canvasContainer {
+    position: relative;
+    border: 2px solid #0f3460;
+}
+
+.mapCanvas {
+    display: block;
+    image-rendering: pixelated;
+    /* cursor is set dynamically via inline style based on tool */
+}
+
+.canvasControls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px;
+    background-color: #16213e;
+    border-top: 1px solid #0f3460;
+}
+
+.controlBtn {
+    width: 32px;
+    height: 32px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.controlBtn:hover {
+    background-color: #e94560;
+}
+
+.controlLabel {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cursorPosition {
+    margin-left: auto;
+    color: #888;
+    font-size: 12px;
+}
+
+/* Right Panel Sections */
+.section {
+    padding: 12px;
+    border-bottom: 1px solid #0f3460;
+}
+
+.section h3 {
+    font-size: 12px;
+    color: #e94560;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+}
+
+/* Tool Buttons */
+.toolButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+}
+
+.toolBtn {
+    padding: 8px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.toolBtn:hover {
+    background-color: #1a4a7a;
+}
+
+.toolBtnActive {
+    background-color: #e94560;
+    border-color: #ff6b8a;
+}
+
+/* Brush Sizes */
+.brushSizes {
+    display: flex;
+    gap: 4px;
+}
+
+.brushBtn {
+    flex: 1;
+    padding: 8px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.brushBtn:hover {
+    background-color: #1a4a7a;
+}
+
+.brushBtnActive {
+    background-color: #e94560;
+    border-color: #ff6b8a;
+}
+
+/* Layer List */
+.layerList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.layerItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.layerItem:hover {
+    background-color: #0f3460;
+}
+
+.layerItemActive {
+    background-color: #0f3460;
+    border-left: 3px solid #e94560;
+}
+
+.layerCollision {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #0f3460;
+}
+
+.layerName {
+    font-size: 12px;
+}
+
+.layerVisibility {
+    cursor: pointer;
+}
+
+/* Map Settings */
+.settingRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.settingRow label {
+    width: 50px;
+    font-size: 12px;
+}
+
+.settingInput {
+    flex: 1;
+    padding: 6px 8px;
+    background-color: #0d1b2a;
+    border: 1px solid #0f3460;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 12px;
+}
+
+.btnFull {
+    width: 100%;
+    padding: 8px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btnFull:hover {
+    background-color: #e94560;
+}
+
+/* Footer */
+.editorFooter {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 6px 16px;
+    background-color: #0f3460;
+    font-size: 12px;
+    color: #888;
+}
+
+.unsavedIndicator {
+    color: #e94560;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Loading */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 18px;
+    color: #e94560;
+}

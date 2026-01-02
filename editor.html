@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Office Map Editor</title>
+    <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+    <!-- Header Menu -->
+    <header class="editor-header">
+        <div class="logo">2D Office Map Editor</div>
+        <nav class="menu">
+            <button id="btnNew" title="New Map (Ctrl+N)">New</button>
+            <button id="btnOpen" title="Open Map (Ctrl+O)">Open</button>
+            <button id="btnSave" title="Save JSON (Ctrl+S)">Save JSON</button>
+            <button id="btnExportJS" title="Export as JavaScript">Export JS</button>
+        </nav>
+        <input type="file" id="fileInput" accept=".json" style="display: none;">
+    </header>
+
+    <!-- Main Editor Area -->
+    <main class="editor-main">
+        <!-- Left Panel: Tileset Palette -->
+        <aside class="panel panel-left">
+            <div class="panel-header">
+                <h3>Tileset</h3>
+            </div>
+            <div class="palette-container" id="paletteContainer">
+                <canvas id="paletteCanvas"></canvas>
+            </div>
+            <div class="tile-preview">
+                <span>Selected: <strong id="selectedTileIndex">-1</strong></span>
+                <canvas id="previewCanvas" width="64" height="64"></canvas>
+            </div>
+        </aside>
+
+        <!-- Center: Map Canvas -->
+        <section class="panel panel-center">
+            <div class="canvas-wrapper">
+                <div class="canvas-container" id="canvasContainer">
+                    <canvas id="mapCanvas"></canvas>
+                </div>
+            </div>
+            <div class="canvas-controls">
+                <button id="btnZoomOut" title="Zoom Out">-</button>
+                <span id="zoomLevel">100%</span>
+                <button id="btnZoomIn" title="Zoom In">+</button>
+                <label><input type="checkbox" id="showGrid" checked> Grid</label>
+                <label><input type="checkbox" id="showCollision"> Show Collision</label>
+                <span id="cursorPosition">Position: (0, 0)</span>
+            </div>
+        </section>
+
+        <!-- Right Panel: Tools and Layers -->
+        <aside class="panel panel-right">
+            <!-- Tools Section -->
+            <div class="section">
+                <h3>Tools</h3>
+                <div class="tool-buttons">
+                    <button id="toolBrush" class="tool-btn active" data-tool="brush" title="Brush (B)">
+                        Brush
+                    </button>
+                    <button id="toolEraser" class="tool-btn" data-tool="eraser" title="Eraser (E)">
+                        Eraser
+                    </button>
+                    <button id="toolFill" class="tool-btn" data-tool="fill" title="Fill Bucket (G)">
+                        Fill
+                    </button>
+                    <button id="toolEyedropper" class="tool-btn" data-tool="eyedropper" title="Eyedropper (I)">
+                        Pick
+                    </button>
+                </div>
+            </div>
+
+            <!-- Brush Size Section -->
+            <div class="section">
+                <h3>Brush Size</h3>
+                <div class="brush-sizes">
+                    <button id="brush1" class="brush-btn active" data-size="1">1x1</button>
+                    <button id="brush2" class="brush-btn" data-size="2">2x2</button>
+                    <button id="brush3" class="brush-btn" data-size="3">3x3</button>
+                </div>
+            </div>
+
+            <!-- Layers Section -->
+            <div class="section">
+                <h3>Layers</h3>
+                <ul class="layer-list">
+                    <li class="layer-item" data-layer="decorations">
+                        <input type="checkbox" checked class="layer-visibility" data-layer="decorations">
+                        <span class="layer-name">4. Decorations</span>
+                    </li>
+                    <li class="layer-item" data-layer="furniture">
+                        <input type="checkbox" checked class="layer-visibility" data-layer="furniture">
+                        <span class="layer-name">3. Furniture</span>
+                    </li>
+                    <li class="layer-item" data-layer="walls">
+                        <input type="checkbox" checked class="layer-visibility" data-layer="walls">
+                        <span class="layer-name">2. Walls</span>
+                    </li>
+                    <li class="layer-item active" data-layer="floor">
+                        <input type="checkbox" checked class="layer-visibility" data-layer="floor">
+                        <span class="layer-name">1. Floor</span>
+                    </li>
+                    <li class="layer-item layer-collision" data-layer="collision">
+                        <input type="checkbox" class="layer-visibility" data-layer="collision">
+                        <span class="layer-name">Collision</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Map Settings Section -->
+            <div class="section">
+                <h3>Map Size</h3>
+                <div class="setting-row">
+                    <label>Width:</label>
+                    <input type="number" id="mapWidth" value="20" min="5" max="100">
+                </div>
+                <div class="setting-row">
+                    <label>Height:</label>
+                    <input type="number" id="mapHeight" value="15" min="5" max="100">
+                </div>
+                <button id="btnResize" class="btn-full">Resize Map</button>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Status Bar -->
+    <footer class="editor-footer">
+        <span id="statusText">Ready</span>
+        <span id="mapInfo">Map: 20x15</span>
+        <span id="unsavedIndicator" class="hidden">* Unsaved</span>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/tileset.js"></script>
+    <script src="js/editor-io.js"></script>
+    <script src="js/editor-ui.js"></script>
+    <script src="js/editor.js"></script>
+</body>
+</html>

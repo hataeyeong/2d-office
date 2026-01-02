@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Tileset Debug Viewer</title>
+    <style>
+        body {
+            background: #1a1a2e;
+            color: white;
+            font-family: monospace;
+            padding: 20px;
+        }
+        #tilesetCanvas {
+            border: 2px solid #4a4a6a;
+            image-rendering: pixelated;
+        }
+        .info {
+            margin: 10px 0;
+        }
+        #coords {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tileset Debug Viewer</h1>
+    <div class="info">Click on a tile to see its index</div>
+    <div id="coords">Index: -</div>
+    <canvas id="tilesetCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('tilesetCanvas');
+        const ctx = canvas.getContext('2d');
+        const coordsDiv = document.getElementById('coords');
+
+        const TILE_SIZE = 32;
+        const TILES_PER_ROW = 16;
+
+        const img = new Image();
+        img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(img, 0, 0);
+
+            // Draw grid and indices
+            ctx.strokeStyle = 'rgba(255,0,0,0.3)';
+            ctx.fillStyle = 'yellow';
+            ctx.font = '8px Arial';
+
+            const rows = Math.ceil(img.height / TILE_SIZE);
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < TILES_PER_ROW; col++) {
+                    const x = col * TILE_SIZE;
+                    const y = row * TILE_SIZE;
+                    const index = row * TILES_PER_ROW + col;
+
+                    ctx.strokeRect(x, y, TILE_SIZE, TILE_SIZE);
+                    ctx.fillText(index, x + 2, y + 10);
+                }
+            }
+        };
+        img.src = './Modern_Office_Revamped_v1.2/Modern_Office_32x32.png';
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const col = Math.floor(x / TILE_SIZE);
+            const row = Math.floor(y / TILE_SIZE);
+            const index = row * TILES_PER_ROW + col;
+
+            coordsDiv.innerHTML = `
+                Index: ${index}<br>
+                Row: ${row}<br>
+                Col: ${col}<br>
+                Position: (${col * TILE_SIZE}, ${row * TILE_SIZE})
+            `;
+        });
+    </script>
+</body>
+</html>

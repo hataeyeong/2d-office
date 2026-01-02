@@ -1,0 +1,358 @@
+/* Editor CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: #16213e;
+    border-bottom: 2px solid #0f3460;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e94560;
+}
+
+.menu {
+    display: flex;
+    gap: 8px;
+}
+
+.menu button {
+    padding: 8px 16px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.menu button:hover {
+    background-color: #e94560;
+}
+
+/* Main Editor */
+.editor-main {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Panels */
+.panel {
+    background-color: #16213e;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-left {
+    width: 250px;
+    border-right: 2px solid #0f3460;
+}
+
+.panel-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-right {
+    width: 200px;
+    border-left: 2px solid #0f3460;
+    overflow-y: auto;
+}
+
+.panel-header {
+    padding: 12px;
+    border-bottom: 1px solid #0f3460;
+}
+
+.panel-header h3 {
+    font-size: 14px;
+    color: #e94560;
+}
+
+/* Tileset Palette */
+.palette-container {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #0d1b2a;
+}
+
+#paletteCanvas {
+    display: block;
+    image-rendering: pixelated;
+    cursor: pointer;
+}
+
+.tile-preview {
+    padding: 12px;
+    border-top: 1px solid #0f3460;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#previewCanvas {
+    border: 2px solid #0f3460;
+    image-rendering: pixelated;
+    background-color: #0d1b2a;
+}
+
+/* Canvas Area */
+.canvas-wrapper {
+    flex: 1;
+    overflow: auto;
+    background-color: #0d1b2a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.canvas-container {
+    position: relative;
+    border: 2px solid #0f3460;
+}
+
+#mapCanvas {
+    display: block;
+    image-rendering: pixelated;
+    cursor: crosshair;
+}
+
+.canvas-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px;
+    background-color: #16213e;
+    border-top: 1px solid #0f3460;
+}
+
+.canvas-controls button {
+    width: 32px;
+    height: 32px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.canvas-controls button:hover {
+    background-color: #e94560;
+}
+
+.canvas-controls label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+#cursorPosition {
+    margin-left: auto;
+    color: #888;
+}
+
+/* Right Panel Sections */
+.section {
+    padding: 12px;
+    border-bottom: 1px solid #0f3460;
+}
+
+.section h3 {
+    font-size: 12px;
+    color: #e94560;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+/* Tool Buttons */
+.tool-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+}
+
+.tool-btn {
+    padding: 8px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.tool-btn:hover {
+    background-color: #1a4a7a;
+}
+
+.tool-btn.active {
+    background-color: #e94560;
+    border-color: #ff6b8a;
+}
+
+/* Brush Sizes */
+.brush-sizes {
+    display: flex;
+    gap: 4px;
+}
+
+.brush-btn {
+    flex: 1;
+    padding: 8px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.brush-btn:hover {
+    background-color: #1a4a7a;
+}
+
+.brush-btn.active {
+    background-color: #e94560;
+    border-color: #ff6b8a;
+}
+
+/* Layer List */
+.layer-list {
+    list-style: none;
+}
+
+.layer-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.layer-item:hover {
+    background-color: #0f3460;
+}
+
+.layer-item.active {
+    background-color: #0f3460;
+    border-left: 3px solid #e94560;
+}
+
+.layer-item.layer-collision {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #0f3460;
+}
+
+.layer-name {
+    font-size: 12px;
+}
+
+.layer-visibility {
+    cursor: pointer;
+}
+
+/* Map Settings */
+.setting-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.setting-row label {
+    width: 50px;
+    font-size: 12px;
+}
+
+.setting-row input[type="number"] {
+    flex: 1;
+    padding: 6px 8px;
+    background-color: #0d1b2a;
+    border: 1px solid #0f3460;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 12px;
+}
+
+.btn-full {
+    width: 100%;
+    padding: 8px;
+    background-color: #0f3460;
+    color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-full:hover {
+    background-color: #e94560;
+}
+
+/* Footer */
+.editor-footer {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 6px 16px;
+    background-color: #0f3460;
+    font-size: 12px;
+    color: #888;
+}
+
+#unsavedIndicator {
+    color: #e94560;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d1b2a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0f3460;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1a4a7a;
+}
